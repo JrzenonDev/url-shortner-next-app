@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Home() {
@@ -11,7 +11,19 @@ export default function Home() {
 
     const result = axios.post('/api/shorten', { longUrl });
     console.log(result);
+  };
+
+  const getLinks = async () => {
+    const response = await axios.get('/api/links');
+    return response?.data?.links;
   }
+
+  useEffect(() => {
+    (async () => {
+      let tmpLinks = await getLinks();
+      console.log(tmpLinks);
+    })();
+  }, []);
 
   return (
     <div>
