@@ -4,6 +4,8 @@ import axios from 'axios';
 export default function Home() {
   
   let [longUrl, setLongUrl] = useState('');
+  let [links, setLinks] = useState({});
+
   const onCreate = async (e) => {
     e.preventDefault();
 
@@ -18,9 +20,14 @@ export default function Home() {
     return response?.data?.links;
   }
 
+  const refreshLinks = async () => {
+    const linkObject = await getLinks();
+    setLinks(linkObject);
+  }
+
   useEffect(() => {
     (async () => {
-      let tmpLinks = await getLinks();
+      let tmpLinks = await refreshLinks();
       console.log(tmpLinks);
     })();
   }, []);
