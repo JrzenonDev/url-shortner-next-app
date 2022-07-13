@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import axios from 'axios';
 
 export default function Home() {
   
@@ -7,6 +8,9 @@ export default function Home() {
     e.preventDefault();
 
     console.log(`Make this short: ${longUrl}`);
+
+    const result = axios.post('/api/shorten', { longUrl });
+    console.log(result);
   }
 
   return (
