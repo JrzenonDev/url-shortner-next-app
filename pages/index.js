@@ -1,6 +1,39 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const styles = {
+  h1: {
+    textTransform: 'uppercase',
+  },
+  container: {
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
+  textInput: {
+    width: '100%',
+    padding: '8px 5px',
+    fontSize: '1.2em',
+  },
+  saveButton: {
+    padding: '10px 5px',
+    width: '100%',
+    margin: '5px 0 0 0',
+    fontSize: '1.2em'
+  },
+  table: {
+    width: '100%',
+    margin: '30px 0 0 0',
+  },
+  tableHeader: {
+    fontWeight: 'bold',
+  },
+  tableShortUrlCell: {
+    padding: '5px 20px 5px 0',
+    width: '50%',
+    cursor: 'pointer',
+  },
+}
+
 export default function Home() {
   
   let [longUrl, setLongUrl] = useState('');
@@ -47,23 +80,24 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <h1>Url Shortner</h1>
+    <div style={styles.container}>
+      <h1 style={styles.h1}>Url Shortner</h1>
       <div>
         <input
           type='text'
           placeholder='Enter a short a url'
           value={longUrl}
           onChange={(e) => setLongUrl(e.target.value)}
+          style={styles.textInput}
         />
-        <button onClick={onCreate}>Make it short</button>
+        <button onClick={onCreate} style={styles.saveButton}>Make it short</button>
       </div>
       <div>
-        <table>
+        <table style={styles.table}>
           <thead>
             <tr>
-              <td>Short url</td>
-              <td>Original url</td>
+              <td style={styles.tableHeader}>Short url</td>
+              <td style={styles.tableHeader}>Original url</td>
             </tr>
           </thead>
           <tbody>
@@ -73,6 +107,7 @@ export default function Home() {
               return (
                 <tr key={short}>
                   <td
+                    style={styles.tableShortUrlCell}
                     onClick={() => onShortUrlClick(short)}
                   >
                     {`http://localhost:3000/go/${short}`}
