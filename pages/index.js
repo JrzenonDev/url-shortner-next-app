@@ -63,7 +63,7 @@ export default function Home() {
     navigator.clipboard.writeText(url).then(
       () => {
         // resolved: Text copied to clipboard
-        console.log('Copied link to the clipboard');
+        console.log('Copied link to the clipboard', url);
       },
       () => {
         // rejected: clipboard failed
