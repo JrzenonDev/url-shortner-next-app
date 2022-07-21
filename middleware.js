@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { redis } from './lib/redis'
 
 export default async function middleware(req) {
@@ -12,7 +13,12 @@ export default async function middleware(req) {
 
   // load long url from redis for short url
   const longUrl = await redis.hget('links', shortUrl);
-  console.log(longUrl);
+  if (longUrl) {
+    // short url found
+  } else {
+    // short url NOT fount
+    return NextResponse.redirect(req.nextUrl.origin)
+  }
 
   // redurect to the url
 
